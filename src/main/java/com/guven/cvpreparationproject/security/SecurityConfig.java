@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers("/api/authentication/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/cv").permitAll()   //authenticated()
-                .antMatchers(HttpMethod.GET,"/api/cv/**").permitAll()    //hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST,"/api/cv").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/cv/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/api/internal/**").hasRole(Role.SYSTEM_MANAGER.name())
                 .anyRequest().authenticated();
 
